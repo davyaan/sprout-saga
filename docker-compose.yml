@@ -1,0 +1,28 @@
+services:
+  app:
+    build: ./app
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - flutter-pub-cache:/root/.pub-cache
+    ports:
+      - "8080:8080"
+    tty: true
+    stdin_open: true
+    command: sleep infinity
+
+  backend:
+    build: ./backend
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - backend-node-modules:/app/node_modules
+      - convex-global-config:/root/.convex
+    tty: true
+    stdin_open: true
+    command: sleep infinity
+
+volumes:
+  flutter-pub-cache:
+  backend-node-modules:
+  convex-global-config:
