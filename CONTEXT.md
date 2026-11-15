@@ -20,13 +20,27 @@ Ubiquitous language for Sprout Saga. Use these terms in code, issues, and UI cop
 - **Corrected age** — a Child's age minus the weeks they were born early (from gestational age at birth). Drives Milestone pacing and Catch-up for preterm Children.
 - **Character sheet** — the Child's profile view: profile fields, Measurements, skill tree.
 
+## Skill tree
+
+- **Skill tree** — a Child's full set of Milestones, organized by Branch and Era. Prerequisites are soft: any Milestone can be unlocked at any time (ADR-0003).
+- **Branch** — one of five fixed lanes for life: Movement, Mind, Heart, Voice, Craft (code keys `movement`, `cognitive`, `social`, `language`, `selfcare`).
+  - _Avoid_: domain, category, stat (stats belong to growth tracking, #5).
+- **Era** — an age band of the tree: Baby (0–1), Toddler (1–3), Little one (3–6); later School and Teen. Display names are placeholders.
+  - _Avoid_: level, stage, tier.
+- **Unlock** — the record that a Child reached a Milestone: date + precision (`day`/`month`/`year`/`unknown`), by whom, backfilled flag, optional note. Noun and verb. One per Child per Milestone.
+  - _Avoid_: complete, achieve, check off.
+- **Next up** — a Milestone whose `emergesAt` age has passed and isn't unlocked. A display state, never stored.
+- **Catch-up dismissal** — a stored "Not yet" answer from a Catch-up quest; expires after 3 months of corrected age.
+- **Retired** — a Milestone removed from the catalog but kept for existing Unlocks.
+- _Avoid_ **locked**, **late**, **behind** in UI copy and code: nothing is locked and nothing is late.
+
 ## Timeline & history
 
 - **Saga** — the chronological timeline of a character, merging entries of several **kinds**: Memory, Milestone unlock, Measurement, Badge, profile change, Sprout. A _view_ over separately stored data, filterable by kind; profile changes hidden by default.
 - **Prologue** — the part of the Saga before Sprout. A keepsake to show the child later: week counter, weekly size comparison, Memories.
 - **Memory** — a freeform, caregiver-created entry (date, title, note, free-form tags). Unlocks nothing, triggers no Badge. Prologue Memories belong to the Pregnancy and are shared by all its Children; later Memories belong to one or more Children.
-- **Milestone** — an authored node of the skill tree (#12). Exists only from Sprout onwards.
-  - _Avoid_: using "milestone" for user-created entries — those are Memories.
+- **Milestone** — an authored node of the Skill tree (spec in #6). Exists only from Sprout onwards.
+  - _Avoid_: using "milestone" for user-created entries — those are Memories; "achievement" — that's Badges.
 - **Measurement** — a dated growth data point (weight, length, …). Immutable: corrected by soft-delete and re-create, never edited.
 - **Change log** — append-only record of profile edits (field, old → new, by whom, when).
 
