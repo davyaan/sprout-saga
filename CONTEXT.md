@@ -4,12 +4,18 @@ Ubiquitous language for Sprout Saga. Use these terms in code, issues, and UI cop
 
 ## People & access
 
-- **Family** — the household that shares access to one or more Pregnancies/Children. Has a name (e.g. "The Pasquiers").
+- **Family** — the household that shares access to one or more Pregnancies/Children. Has a name (e.g. "The Pasquiers"). An account can belong to several Families; nothing crosses between them.
 - **Caregiver** — a person who is a member of a Family. Carries a free-text **relationship label** ("Dad", "Grandma", "Nanny") that is display-only and grants nothing.
-- **Right** — a single permission (e.g. "edit profile"). Caregivers hold Rights through **Roles**, never through their relationship label.
-- **Role** — a named bundle of Rights assigned to Caregivers. Predefined roles are expected first; whether Families can define custom roles is decided in #13.
-- **Guardian** — the all-Rights Role (the Family's admin). The Family's creator is a Guardian; a Family may have several (e.g. both parents) and must always have at least one. Only Guardians edit Pregnancy/Child profiles.
+- **Membership** — one account's place in one Family: relationship label, Role, Scope, Circles. All Rights are per Membership.
+- **Right** — a single permission from a fixed catalogue in code (e.g. `memory.view`, `memory.add`). Caregivers hold Rights through **Roles**, never through their relationship label. Every `*.add` requires its `*.view`; every Child Right requires `child.view`. Editing your own entries is not a Right: it follows from holding the matching `*.add`.
+- **Role** — a named bundle of Rights, defined per Family by Guardians (custom Roles). A starter **Caregiver** Role ships pre-made and is fully editable. Each Membership has exactly one Role.
+- **Guardian** — the built-in, non-editable all-Rights Role (the Family's admin). Only Guardians hold the reserved Rights (`profile.edit`, `members.manage`, `roles.manage`, `circles.manage`, `pregnancy.end`, `family.delete`), and only Guardians grant Guardian. The Family's creator is a Guardian; a Family may have several and must always have at least one.
   - _Avoid_: owner, admin, parent (as a permission concept).
+- **Scope** — which characters a Membership's Rights apply to: _all characters_ (default, includes future ones) or a chosen list. A Pregnancy and the Children it sprouts into are one lineage. Guardians are always all-characters.
+- **Circle** — a named, Guardian-managed group of members used as a Memory's **audience** (Everyone, or one or more Circles). Independent of Roles: Roles say _what_ you can do, Circles say _what you're close enough to see_.
+  - _Avoid_: group (confused with Role), album, collection.
+- **Invite** — a single-use link + short code (7-day expiry, revocable) pre-filled with label, Role, Scope and Circles; explicitly accepted by the invitee. A non-Guardian inviter can grant only a subset of their own Rights, Scope and Circles.
+- **Former member** — a Membership that left or was removed: attribution frozen, no Rights. Their entries stay with the Family.
 
 ## The character
 
