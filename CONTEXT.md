@@ -47,7 +47,11 @@ Ubiquitous language for Sprout Saga. Use these terms in code, issues, and UI cop
 - **Memory** — a freeform, caregiver-created entry (date, title, note, free-form tags). Unlocks nothing, triggers no Badge. Prologue Memories belong to the Pregnancy and are shared by all its Children; later Memories belong to one or more Children.
 - **Milestone** — an authored node of the Skill tree (spec in #6). Exists only from Sprout onwards.
   - _Avoid_: using "milestone" for user-created entries — those are Memories; "achievement" — that's Badges.
-- **Measurement** — a dated growth data point (weight, length, …). Immutable: corrected by soft-delete and re-create, never edited.
+- **Measurement** — a dated data point of one **Measurement kind** about a Child. Immutable: corrected by soft-delete and re-create, never edited.
+  - _Avoid_: stat (as an entity name), entry, reading.
+- **Measurement kind** — one entry of a fixed catalogue in code, which will grow: weight, length/height (one kind, "length" lying down, "height" standing), head circumference, teeth count, shoe size, clothing size, hair length, hair colour. Each kind has a value shape (number with unit, count, step on a fixed scale, or choice from a palette); only number kinds draw a curve. Shoe and clothing sizes, hair length and hair colour are steps or choices, never free values.
+- **Rewind** — viewing a character as of a past date, the **Rewind date**. One shared cursor across views: the Character sheet, Skill tree and Saga all show their state as of that date, and switching views keeps it. Before Sprout, the Character sheet shows the Pregnancy and the Skill tree is not yet sprouted. Bounded by the first Prologue entry (or birth, for a Child created directly) and today.
+  - _Avoid_: time travel, flashback (too close to Memory), history (the Change log).
 - **Change log** — append-only record of profile edits (field, old → new, by whom, when).
 
 ## Onboarding
